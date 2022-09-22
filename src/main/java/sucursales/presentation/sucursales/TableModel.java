@@ -38,18 +38,24 @@ public class TableModel extends AbstractTableModel implements javax.swing.table.
         Sucursales sucursales = rows.get(row);
         switch (cols[col]){
             case CODIGO: return sucursales.getCodigo();
-            case NOMBRE: return sucursales.getNombre();
+            case REFERENCIA: return sucursales.getNombre();
+            case DIRECCION: return sucursales.getDireccion();
+            case ZONAJE: return sucursales.getZonaje();
             default: return "";
         }
     }
 
     public static final int CODIGO=0;
-    public static final int NOMBRE=1;
+    public static final int REFERENCIA=1;
+    public static final int DIRECCION = 2;
+    public static final int ZONAJE = 3;
 
-    String[] colNames = new String[2];
+    String[] colNames = new String[4];
     private void initColNames(){
         colNames[CODIGO]= "Codigo";
-        colNames[NOMBRE]= "Nombre";
+        colNames[REFERENCIA]= "Referencia";
+        colNames[DIRECCION] = "Direccion";
+        colNames[ZONAJE] = "Zonaje";
     }
 
 }

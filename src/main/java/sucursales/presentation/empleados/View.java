@@ -15,6 +15,7 @@ public class View implements Observer {
     private JButton agregarFld;
     private JTable empleadosFld;
     private JLabel nombreLbl;
+    private JButton borrarBtn;
 
     public View() {
         buscarFld.addActionListener(new ActionListener() {
@@ -59,9 +60,10 @@ public class View implements Observer {
 
     @Override
     public void update(Observable updatedModel, Object parametros) {
-        int[] cols = {TableModel.CEDULA, TableModel.NOMBRE};
+        int[] cols = {TableModel.CEDULA, TableModel.NOMBRE, TableModel.TELEFONO, TableModel.SALARIO, TableModel.SUCURSAL, TableModel.ZONAJE, TableModel.SALTOTAL};
         empleadosFld.setModel(new TableModel(cols, model.getEmpleados()));
         empleadosFld.setRowHeight(30);
+        empleadosFld.getColumnModel().getColumn(1).setPreferredWidth(130);
         this.panel.revalidate();
     }
 

@@ -4,6 +4,7 @@ import sucursales.Application;
 import sucursales.logic.Sucursales;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Observable;
@@ -21,6 +22,7 @@ public class View implements Observer {
     private JButton guardarBtn;
     private JButton cancelarBtn;
     private JPanel panel;
+    private JLabel mapaLbl;
 
     public View(){
 
@@ -43,6 +45,9 @@ public class View implements Observer {
                 controller.hide();
             }
         });
+        mapaLbl.setIcon(new ImageIcon("D:\\Andres Docs\\CLASES\\Progra 3\\Proyecto\\icons\\mapa.png"));
+        //hacer mas pequeño el icono que contiene el mapaLbl
+        mapaLbl.setIcon(new ImageIcon(((ImageIcon) mapaLbl.getIcon()).getImage().getScaledInstance(330, 330, Image.SCALE_SMOOTH)));
     }
 
     public JPanel getPanel() {
@@ -67,6 +72,8 @@ public class View implements Observer {
         this.codigoFld.setEnabled(model.getModo() == Application.MODO_AGREGAR);
         this.codigoFld.setText(current.getCodigo());
         referenciaFld.setText(current.getNombre());
+        direccionFld.setText(current.getDireccion());
+        zonajeFld.setText(current.getZonaje());
         this.panel.validate();
     }
 
@@ -74,6 +81,8 @@ public class View implements Observer {
         Sucursales e = new Sucursales();
         e.setCodigo(codigoFld.getText());
         e.setNombre(referenciaFld.getText());
+        e.setDireccion(direccionFld.getText());
+        e.setZonaje(zonajeFld.getText());
         return e;
     }
 
@@ -90,31 +99,35 @@ public class View implements Observer {
 
         if (referenciaFld.getText().length() == 0) {
             valid = false;
-            referenciaFld.setBorder(Application.BORDER_ERROR);
-            referenciaFld.setToolTipText("Referencia requerida");
+            referenciaLbl.setBorder(Application.BORDER_ERROR);
+            referenciaLbl.setToolTipText("Referencia requerida");
         } else {
-            referenciaFld.setBorder(null);
-            referenciaFld.setToolTipText(null);
+            referenciaLbl.setBorder(null);
+            referenciaLbl.setToolTipText(null);
         }
 
         if (direccionFld.getText().length() == 0) {
             valid = false;
-            direccionFld.setBorder(Application.BORDER_ERROR);
-            direccionFld.setToolTipText("Direccion requerida");
+            direccionLbl.setBorder(Application.BORDER_ERROR);
+            direccionLbl.setToolTipText("Direccion requerida");
         } else {
-            direccionFld.setBorder(null);
-            direccionFld.setToolTipText(null);
+            direccionLbl.setBorder(null);
+            direccionLbl.setToolTipText(null);
         }
 
         if (zonajeFld.getText().length() == 0) {
             valid = false;
-            zonajeFld.setBorder(Application.BORDER_ERROR);
-            zonajeFld.setToolTipText("Zonaje requerido");
+            zonajeLbl.setBorder(Application.BORDER_ERROR);
+            zonajeLbl.setToolTipText("Zonaje requerido");
         } else {
-            zonajeFld.setBorder(null);
-            zonajeFld.setToolTipText(null);
+            zonajeLbl.setBorder(null);
+            zonajeLbl.setToolTipText(null);
         }
 
         return valid;
+    }
+
+    public JLabel getMapaLbl() {
+        return mapaLbl;
     }
 }

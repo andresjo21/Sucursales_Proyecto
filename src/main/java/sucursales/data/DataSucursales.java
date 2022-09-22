@@ -11,9 +11,9 @@ public class DataSucursales {
     public DataSucursales() {
         sucursales = new ArrayList<>();
 
-        sucursales.add(new Sucursales("11", "San Jose"));
-        sucursales.add(new Sucursales("22", "Heredia"));
-        sucursales.add(new Sucursales("33", "Alajuela"));
+        sucursales.add(new Sucursales("001", "Sabana", "San Jose, 100 O Teletica","1.0"));
+        sucursales.add(new Sucursales("002", "Liberia","Guanacaste, Liberia, 250 S Iglesia","2.0"));
+        sucursales.add(new Sucursales("003", "Golfito","Puntarenas, Golfito, barrio Huston","4.0"));
     }
 
     public List<Sucursales> getSucursales() {

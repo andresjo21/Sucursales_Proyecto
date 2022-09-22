@@ -16,6 +16,7 @@ public class View implements Observer {
     private JButton buscarFld;
     private JTable sucursalesFld;
     private JButton agregarFld;
+    private JButton borrarBtn;
 
     public View() {
 
@@ -59,9 +60,10 @@ public class View implements Observer {
 
     @Override
     public void update(Observable updateModel, Object parametros) {
-        int[] cols = {TableModel.CODIGO, TableModel.NOMBRE};
+        int[] cols = {TableModel.CODIGO, TableModel.REFERENCIA, TableModel.DIRECCION, TableModel.ZONAJE};
         sucursalesFld.setModel(new TableModel(cols, model.getSucursales()));
         sucursalesFld.setRowHeight(30);
+        sucursalesFld.getColumnModel().getColumn(2).setPreferredWidth(220);
         this.pnaelSucursal.revalidate();
     }
 }
