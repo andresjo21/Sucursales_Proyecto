@@ -1,5 +1,7 @@
 package sucursales.logic;
 
+import sucursales.Application;
+
 public class Sucursales {
     String codigo;
     String nombre;
@@ -29,4 +31,5 @@ public class Sucursales {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
 }

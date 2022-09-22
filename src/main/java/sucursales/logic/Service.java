@@ -38,10 +38,22 @@ public class Service {
         else throw new Exception("Empleado no existe");
     }
 
+    public Sucursales sucursalGet(String codigo) throws Exception{
+        Sucursales result = dataSucursal.getSucursales().stream().filter(e->e.getCodigo().equals(codigo)).findFirst().orElse(null);
+        if (result!=null) return result;
+        else throw new Exception("Sucursal no existe");
+    }
+
     public void empleadoAdd(Empleado empleado) throws Exception{
         Empleado result = data.getEmpleados().stream().filter(e->e.getCedula().equals(empleado.getCedula())).findFirst().orElse(null);
         if (result==null) data.getEmpleados().add(empleado);
         else throw new Exception("Empleado ya existe");
+    }
+
+    public void sucursalAdd(Sucursales sucursal) throws Exception{
+        Sucursales result = dataSucursal.getSucursales().stream().filter(e->e.getCodigo().equals(sucursal.getCodigo())).findFirst().orElse(null);
+        if (result==null) dataSucursal.getSucursales().add(sucursal);
+        else throw new Exception("Sucursal ya existe");
     }
 
     public void empleadoUpdate(Empleado empleado) throws Exception{
@@ -55,7 +67,21 @@ public class Service {
         }
     }
 
+    public void sucursalUpdate(Sucursales sucursal) throws Exception{
+        Sucursales result;
+        try{
+            result = this.sucursalGet(sucursal.codigo);
+            dataSucursal.getSucursales().remove(result);
+            dataSucursal.getSucursales().add(sucursal);
+        }catch (Exception e) {
+            throw new Exception("Sucursal no existe");
+        }
+    }
+
     public List<Sucursales> sucursalesSearch(String filtro){
-        return dataSucursal.getSucursales().stream().filter(e->e.getNombre().contains(filtro)).collect(Collectors.toList());
+        return dataSucursal.getSucursales().stream()
+                .filter(e->e.getNombre().contains(filtro))
+                .sorted(Comparator.comparing(e -> e.getCodigo()))
+                .collect(Collectors.toList());
     }
  }

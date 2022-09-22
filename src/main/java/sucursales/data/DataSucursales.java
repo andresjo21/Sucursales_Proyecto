@@ -20,7 +20,7 @@ public class DataSucursales {
         return sucursales;
     }
 
-    public void setEmpleados(List<Sucursales> empleados) {
+    public void setSucursales(List<Sucursales> empleados) {
         this.sucursales = empleados;
     }
 }

@@ -24,6 +24,18 @@ public class Controller {
             model.commit();
         }
 
+        public void preAgregar(){
+        Application.sucursalController.preAgregar();
+    }
+
+        public void editar(int row){
+            String codigo = model.getSucursales().get(row).getCodigo();
+            Sucursales e=null;
+            try {
+                e= Service.instance().sucursalGet(codigo);
+                Application.sucursalController.editar(e);
+            } catch (Exception ex) {}
+        }
         public void show(){
             Application.window.setContentPane(view.getPanelSucursal());
         }

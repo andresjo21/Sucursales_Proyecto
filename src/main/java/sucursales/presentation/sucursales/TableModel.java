@@ -5,7 +5,7 @@ import sucursales.logic.Sucursales;
 import javax.swing.table.AbstractTableModel;
 import java.util.List;
 
-public class TableModel extends javax.swing.table.AbstractTableModel implements javax.swing.table.TableModel {
+public class TableModel extends AbstractTableModel implements javax.swing.table.TableModel {
 
     List<Sucursales> rows;
     int[] cols;

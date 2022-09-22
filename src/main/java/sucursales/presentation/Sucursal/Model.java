@@ -15,5 +15,15 @@ public class Model extends java.util.Observable{
 
     public Sucursales getCurrent(){ return current; }
     public void setCurrent(Sucursales current){ this.current = current; }
-    
+
+    @Override
+    public void addObserver(java.util.Observer o){
+        super.addObserver(o);
+        this.commit();
+    }
+
+    public void commit(){
+        setChanged();
+        notifyObservers(null);
+    }
 }
