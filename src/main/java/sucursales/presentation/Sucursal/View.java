@@ -23,6 +23,11 @@ public class View implements Observer {
     private JButton cancelarBtn;
     private JPanel panel;
     private JLabel mapaLbl;
+    private JLabel sucursalLbl;
+
+    private int x;
+
+    private int y;
 
     public View(){
 
@@ -36,6 +41,7 @@ public class View implements Observer {
                     }catch (Exception ex){
                         JOptionPane.showMessageDialog(panel, ex.getMessage(),"ERROR",JOptionPane.ERROR_MESSAGE);
                     }
+                    sucursalLbl.setVisible(false);
                 }
             }
         });
@@ -45,13 +51,39 @@ public class View implements Observer {
                 controller.hide();
             }
         });
-        mapaLbl.setIcon(new ImageIcon("D:\\Andres Docs\\CLASES\\Progra 3\\Proyecto\\icons\\mapa.png"));
-        //hacer mas pequeño el icono que contiene el mapaLbl
-        mapaLbl.setIcon(new ImageIcon(((ImageIcon) mapaLbl.getIcon()).getImage().getScaledInstance(330, 330, Image.SCALE_SMOOTH)));
+        mapaLbl.setLayout(null);
+        mapaLbl.setIcon(new ImageIcon("../icons/mapa.png"));
+        //Adapta tamaño de la imagen
+        mapaLbl.setIcon(new ImageIcon(((ImageIcon) mapaLbl.getIcon()).getImage().getScaledInstance(400, 400, Image.SCALE_SMOOTH)));
+
+        //Action listener de mapaLbl que guarda las coordenadas cuando se haga doble click
+        // y agrega la imagen de Sucursal.png en las coordenadas anteriormente guardadas sobre el mapaLbl
+        mapaLbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                if (evt.getClickCount() == 2) {
+                    x = evt.getX()-15;
+                    y = evt.getY()-27;
+                    //Agrega el label con la imagen de Sucursal en las coordenadas x,y
+                    creacionSucursalLbl(x,y);
+                }
+            }
+        });
+
     }
 
     public JPanel getPanel() {
         return panel;
+    }
+
+    public void creacionSucursalLbl(int x, int y){
+        sucursalLbl = new JLabel();
+        sucursalLbl.setLayout(null);
+        sucursalLbl.setIcon(new ImageIcon("../icons/Sucursal.png"));
+        sucursalLbl.setIcon(new ImageIcon(((ImageIcon) sucursalLbl.getIcon()).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
+        sucursalLbl.setBounds(x, y, 30, 30);
+        mapaLbl.add(sucursalLbl);
+        mapaLbl.repaint();
     }
 
     Controller controller;
@@ -69,11 +101,16 @@ public class View implements Observer {
     @Override
     public void update(Observable updatedModel, Object parametros) {
         Sucursales current = model.getCurrent();
+        mapaLbl.removeAll();
         this.codigoFld.setEnabled(model.getModo() == Application.MODO_AGREGAR);
         this.codigoFld.setText(current.getCodigo());
         referenciaFld.setText(current.getNombre());
         direccionFld.setText(current.getDireccion());
         zonajeFld.setText(current.getZonaje());
+        if(model.getModo() == Application.MODO_EDITAR) {
+            creacionSucursalLbl(current.getX(), current.getY());
+            mapaLbl.add(sucursalLbl);
+        }
         this.panel.validate();
     }
 
@@ -83,6 +120,8 @@ public class View implements Observer {
         e.setNombre(referenciaFld.getText());
         e.setDireccion(direccionFld.getText());
         e.setZonaje(zonajeFld.getText());
+        e.setX(x);
+        e.setY(y);
         return e;
     }
 
