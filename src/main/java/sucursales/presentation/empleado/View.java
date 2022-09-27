@@ -35,6 +35,10 @@ public class View implements Observer {
             @Override
             public void actionPerformed(ActionEvent e) {
                 controller.hide();
+                nombreLbl.setBorder(null);
+                nombreLbl.setToolTipText(null);
+                cedulaLbl.setBorder(null);
+                cedulaLbl.setToolTipText(null);
             }
         });
     }

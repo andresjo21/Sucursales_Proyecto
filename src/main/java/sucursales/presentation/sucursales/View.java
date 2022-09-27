@@ -1,6 +1,9 @@
 package sucursales.presentation.sucursales;
 
+import sucursales.logic.Sucursales;
+
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -17,6 +20,9 @@ public class View implements Observer {
     private JTable sucursalesFld;
     private JButton agregarFld;
     private JButton borrarBtn;
+    private JLabel mapaLbl;
+    private JLabel puntoSucursalLbl;
+    private JLabel puntoSelSucursalLbl;
 
     public View() {
 
@@ -40,8 +46,29 @@ public class View implements Observer {
                     int row = sucursalesFld.getSelectedRow();
                     controller.editar(row);
                 }
+                if(e.getClickCount() == 1){
+                   for(int i = 0; i < model.getSucursales().size(); i++){
+                       mapaLbl.getComponent(i).setVisible(true);
+                        if(i == sucursalesFld.getSelectedRow()){
+                            mapaLbl.getComponent(i).setVisible(false);
+                            puntoSucursalLbl = new JLabel();
+                            puntoSucursalLbl.setLayout(null);
+                            puntoSucursalLbl.setIcon(new ImageIcon("../icons/SucursalSel.png"));
+                            puntoSucursalLbl.setIcon(new ImageIcon(((ImageIcon) puntoSucursalLbl.getIcon()).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
+                            puntoSucursalLbl.setBounds(model.getSucursales().get(i).getX(), model.getSucursales().get(i).getY(),30,30);
+                            puntoSucursalLbl.setToolTipText(model.getSucursales().get(i).getNombre() + " " + model.getSucursales().get(i).getDireccion());
+                            mapaLbl.add(puntoSucursalLbl);
+                            mapaLbl.repaint();
+                        }
+                    }
+                }
             }
         });
+
+        mapaLbl.setLayout(null);
+        mapaLbl.setIcon(new ImageIcon("../icons/mapa.png"));
+        //Adapta tamaño de la imagen
+        mapaLbl.setIcon(new ImageIcon(((ImageIcon) mapaLbl.getIcon()).getImage().getScaledInstance(400, 400, Image.SCALE_SMOOTH)));
     }
 
     public JPanel getPanelSucursal() {
@@ -65,5 +92,21 @@ public class View implements Observer {
         sucursalesFld.setRowHeight(30);
         sucursalesFld.getColumnModel().getColumn(2).setPreferredWidth(220);
         this.pnaelSucursal.revalidate();
+        creacionSucursalLbl();
+    }
+
+    public void creacionSucursalLbl(){
+        mapaLbl.removeAll();
+        for(int i = 0; i < model.getSucursales().size(); i++){
+            puntoSucursalLbl = new JLabel();
+            puntoSucursalLbl.setLayout(null);
+            puntoSucursalLbl.setIcon(new ImageIcon("../icons/Sucursal.png"));
+            puntoSucursalLbl.setIcon(new ImageIcon(((ImageIcon) puntoSucursalLbl.getIcon()).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
+            puntoSucursalLbl.setBounds( model.getSucursales().get(i).getX(), model.getSucursales().get(i).getY(),30, 30);
+            puntoSucursalLbl.setToolTipText(model.getSucursales().get(i).getNombre() + " " + model.getSucursales().get(i).getDireccion());
+            mapaLbl.add(puntoSucursalLbl,i);
+            mapaLbl.repaint();
+        }
+
     }
 }

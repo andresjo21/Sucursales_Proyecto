@@ -38,10 +38,10 @@ public class View implements Observer {
                     Sucursales n = take();
                     try{
                         controller.guardar(n);
+                        sucursalLbl = null;
                     }catch (Exception ex){
                         JOptionPane.showMessageDialog(panel, ex.getMessage(),"ERROR",JOptionPane.ERROR_MESSAGE);
                     }
-                    sucursalLbl.setVisible(false);
                 }
             }
         });
@@ -49,6 +49,16 @@ public class View implements Observer {
             @Override
             public void actionPerformed(ActionEvent e) {
                 controller.hide();
+                codigoLbl.setBorder(null);
+                codigoLbl.setToolTipText(null);
+                referenciaLbl.setBorder(null);
+                referenciaLbl.setToolTipText(null);
+                direccionLbl.setBorder(null);
+                direccionLbl.setToolTipText(null);
+                zonajeLbl.setBorder(null);
+                zonajeLbl.setToolTipText(null);
+                mapaLbl.setBorder(null);
+                mapaLbl.setToolTipText(null);
             }
         });
         mapaLbl.setLayout(null);
@@ -61,12 +71,10 @@ public class View implements Observer {
         mapaLbl.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                if (evt.getClickCount() == 2) {
-                    x = evt.getX()-15;
-                    y = evt.getY()-27;
-                    //Agrega el label con la imagen de Sucursal en las coordenadas x,y
-                    creacionSucursalLbl(x,y);
-                }
+                x = evt.getX()-15;
+                y = evt.getY()-27;
+                //Agrega el label con la imagen de Sucursal en las coordenadas x,y
+                creacionSucursalLbl(x,y);
             }
         });
 
@@ -77,7 +85,7 @@ public class View implements Observer {
     }
 
     public void creacionSucursalLbl(int x, int y){
-        sucursalLbl = new JLabel();
+        if(sucursalLbl == null) sucursalLbl = new JLabel();
         sucursalLbl.setLayout(null);
         sucursalLbl.setIcon(new ImageIcon("../icons/Sucursal.png"));
         sucursalLbl.setIcon(new ImageIcon(((ImageIcon) sucursalLbl.getIcon()).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
@@ -161,6 +169,14 @@ public class View implements Observer {
         } else {
             zonajeLbl.setBorder(null);
             zonajeLbl.setToolTipText(null);
+        }
+        if(sucursalLbl == null){
+            valid = false;
+            mapaLbl.setBorder(Application.BORDER_ERROR);
+            mapaLbl.setToolTipText("Es requerido escoger una zona en el mapa");
+        }else{
+            mapaLbl.setBorder(null);
+            mapaLbl.setToolTipText(null);
         }
 
         return valid;
