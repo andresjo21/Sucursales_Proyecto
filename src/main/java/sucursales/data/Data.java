@@ -1,20 +1,23 @@
 package sucursales.data;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlRootElement;
 import sucursales.logic.Empleado;
+import sucursales.logic.Sucursales;
 
-import java.security.Provider;
 import java.util.ArrayList;
 import java.util.List;
 
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Data {
     private List<Empleado> empleados;
+    private List<Sucursales> sucursales;
 
     public Data() {
         empleados = new ArrayList<>();
-
-        empleados.add(new Empleado("111", "Franklin Chang","78872356",7500, "001", 7600));
-        empleados.add(new Empleado("222", "Sandra Cauffman", "54647656",8500,"002",8600));
-        empleados.add(new Empleado("333", "Ivan Vargas","68794003",5000,"003",8600));
+        sucursales = new ArrayList<>();
     }
 
     public List<Empleado> getEmpleados() {
@@ -24,4 +27,14 @@ public class Data {
     public void setEmpleados(List<Empleado> empleados) {
         this.empleados = empleados;
     }
+
+    public List<Sucursales> getSucursales() {
+        return sucursales;
+    }
+
+    public void setSucursales(List<Sucursales> sucursales) {
+        this.sucursales = sucursales;
+    }
+
+
 }

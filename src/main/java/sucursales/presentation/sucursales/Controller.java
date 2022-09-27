@@ -1,6 +1,7 @@
 package sucursales.presentation.sucursales;
 
 import sucursales.Application;
+import sucursales.logic.Empleado;
 import sucursales.logic.Service;
 import sucursales.logic.Sucursales;
 
@@ -39,4 +40,18 @@ public class Controller {
         public void show(){
             Application.window.setContentPane(view.getPanelSucursal());
         }
+
+    public List<Sucursales> getLista() {
+        return model.getSucursales();
+    }
+
+    public void borrar(int row){
+        String codigo = model.getSucursales().get(row).getCodigo();
+        Sucursales e=null;
+        try {
+            e= Service.instance().sucursalGet(codigo);
+            Service.instance().sucursalDelete(e);
+            this.buscar("");
+        } catch (Exception ex) {}
+    }
 }

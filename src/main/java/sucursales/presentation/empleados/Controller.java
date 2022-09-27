@@ -40,4 +40,14 @@ public class Controller {
     public void show(){
         Application.window.setContentPane(view.getPanel());
     }
+
+    public void borrar(int row){
+        String cedula = model.getEmpleados().get(row).getCedula();
+        Empleado e=null;
+        try {
+            e= Service.instance().empleadoGet(cedula);
+            Service.instance().empleadoDelete(e);
+            this.buscar("");
+        } catch (Exception ex) {}
+    }
 }

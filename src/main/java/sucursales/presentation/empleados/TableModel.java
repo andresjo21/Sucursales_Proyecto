@@ -43,14 +43,14 @@ public class TableModel extends AbstractTableModel implements javax.swing.table.
             case SALARIO: return empleado.getSalario();
             case SUCURSAL:
             try {
-                return Service.instance().sucursalGet(empleado.getSucursal()).getNombre();
+                return empleado.getSucursal().getNombre();
 
             } catch (Exception e) {
                 e.printStackTrace();
             }
             case ZONAJE:
                 try {
-                    return Service.instance().sucursalGet(empleado.getSucursal()).getZonaje();
+                    return empleado.getSucursal().getZonaje();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

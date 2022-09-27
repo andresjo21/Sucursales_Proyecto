@@ -22,7 +22,6 @@ public class View implements Observer {
     private JButton borrarBtn;
     private JLabel mapaLbl;
     private JLabel puntoSucursalLbl;
-    private JLabel puntoSelSucursalLbl;
 
     public View() {
 
@@ -69,6 +68,14 @@ public class View implements Observer {
         mapaLbl.setIcon(new ImageIcon("../icons/mapa.png"));
         //Adapta tamaño de la imagen
         mapaLbl.setIcon(new ImageIcon(((ImageIcon) mapaLbl.getIcon()).getImage().getScaledInstance(400, 400, Image.SCALE_SMOOTH)));
+
+        borrarBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int row = sucursalesFld.getSelectedRow();
+                controller.borrar(row);
+            }
+        });
     }
 
     public JPanel getPanelSucursal() {
@@ -103,7 +110,7 @@ public class View implements Observer {
             puntoSucursalLbl.setIcon(new ImageIcon("../icons/Sucursal.png"));
             puntoSucursalLbl.setIcon(new ImageIcon(((ImageIcon) puntoSucursalLbl.getIcon()).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
             puntoSucursalLbl.setBounds( model.getSucursales().get(i).getX(), model.getSucursales().get(i).getY(),30, 30);
-            puntoSucursalLbl.setToolTipText(model.getSucursales().get(i).getNombre() + " " + model.getSucursales().get(i).getDireccion());
+            puntoSucursalLbl.setToolTipText("<html>"+model.getSucursales().get(i).getNombre() + "<br>" + model.getSucursales().get(i).getDireccion()+"<html>");
             mapaLbl.add(puntoSucursalLbl,i);
             mapaLbl.repaint();
         }

@@ -1,6 +1,11 @@
 package sucursales.presentation.empleado;
 
+import sucursales.Application;
 import sucursales.logic.Empleado;
+import sucursales.logic.Service;
+import sucursales.logic.Sucursales;
+
+import java.util.List;
 
 public class Model extends java.util.Observable{
     Empleado current;
@@ -34,5 +39,17 @@ public class Model extends java.util.Observable{
     public void commit(){
         setChanged();
         notifyObservers(null);
+    }
+
+    public List<Sucursales> getLista(){
+        return Application.sucursalesController.getLista();
+    }
+
+    public Sucursales getSucursal(String id) {
+        try {
+            return Service.instance().sucursalGet(id);
+        } catch (Exception ex) {
+            return null;
+        }
     }
 }

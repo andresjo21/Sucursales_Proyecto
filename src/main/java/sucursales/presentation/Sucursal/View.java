@@ -10,6 +10,9 @@ import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.Observer;
 
+import static java.lang.Float.parseFloat;
+import static java.lang.Float.valueOf;
+
 public class View implements Observer {
     private JTextField codigoFld;
     private JLabel codigoLbl;
@@ -114,10 +117,12 @@ public class View implements Observer {
         this.codigoFld.setText(current.getCodigo());
         referenciaFld.setText(current.getNombre());
         direccionFld.setText(current.getDireccion());
-        zonajeFld.setText(current.getZonaje());
         if(model.getModo() == Application.MODO_EDITAR) {
+            zonajeFld.setText(valueOf(current.getZonaje()).toString());
             creacionSucursalLbl(current.getX(), current.getY());
             mapaLbl.add(sucursalLbl);
+        }else{
+            zonajeFld.setText("");
         }
         this.panel.validate();
     }
@@ -127,7 +132,7 @@ public class View implements Observer {
         e.setCodigo(codigoFld.getText());
         e.setNombre(referenciaFld.getText());
         e.setDireccion(direccionFld.getText());
-        e.setZonaje(zonajeFld.getText());
+        e.setZonaje(parseFloat(zonajeFld.getText()));
         e.setX(x);
         e.setY(y);
         return e;

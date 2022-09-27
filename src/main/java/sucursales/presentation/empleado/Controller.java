@@ -3,6 +3,7 @@ package sucursales.presentation.empleado;
 import sucursales.Application;
 import sucursales.logic.Empleado;
 import sucursales.logic.Service;
+import sucursales.logic.Sucursales;
 
 import javax.swing.*;
 import java.awt.*;
@@ -30,7 +31,7 @@ public class Controller {
     JDialog dialog;
     public void show(){
         dialog = new JDialog(Application.window,"Empleado", true);
-        dialog.setSize(300,200);
+        dialog.setSize(700,700);
         dialog.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         dialog.setContentPane(view.getPanel());
         Point location = Application.window.getLocation();
@@ -40,14 +41,6 @@ public class Controller {
 
     public void hide(){
       dialog.dispose();
-    }
-
-    public void show1(){
-        Application.window.setContentPane(view.getPanel());
-        Application.window.revalidate();
-    }
-    public void hide1(){
-        Application.mainController.show();
     }
 
     public void guardar(Empleado e) throws Exception {

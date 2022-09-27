@@ -1,17 +1,22 @@
 package sucursales.logic;
 
-import sucursales.data.DataSucursales;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlIDREF;
 
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Empleado {
     String cedula;
     String nombre;
     String telefono;
     double salario;
-    String sucursal;
+
+    @XmlIDREF
+    Sucursales sucursal;
     double salarioTotal;
 
 
-    public Empleado(String cedula, String nombre, String telefono, double salario, String sucursalId ,double salarioTotal) {
+    public Empleado(String cedula, String nombre, String telefono, double salario, Sucursales sucursalId ,double salarioTotal) {
         this.cedula = cedula;
         this.nombre = nombre;
         this.telefono = telefono;
@@ -21,7 +26,7 @@ public class Empleado {
     }
 
     public Empleado() {
-        this("","","",0.0,"",0.0);
+        this("","","",0.0,null,0.0);
     }
 
     public String getCedula() {
@@ -47,7 +52,7 @@ public class Empleado {
     public double getSalario() {
         return salario;
     }
-    public String getSucursal() {
+    public Sucursales getSucursal() {
         return sucursal;
     }
 
@@ -63,7 +68,7 @@ public class Empleado {
         this.salario = salario;
     }
 
-    public void setSucursal(String sucursal) {
+    public void setSucursal(Sucursales sucursal) {
         this.sucursal = sucursal;
     }
 

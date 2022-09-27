@@ -40,6 +40,14 @@ public class View implements Observer {
                 }
             }
         });
+
+        borrarBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int row = empleadosFld.getSelectedRow();
+                controller.borrar(row);
+            }
+        });
     }
 
     public JPanel getPanel() {

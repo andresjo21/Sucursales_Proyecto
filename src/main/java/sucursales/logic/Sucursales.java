@@ -1,17 +1,25 @@
 package sucursales.logic;
 
-import sucursales.Application;
+import jakarta.xml.bind.annotation.*;
 
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Sucursales {
-    String codigo;
-    String nombre;
-    String direccion;
-    String zonaje;
+
+    @XmlID
+    private String codigo;
+
+    private String nombre;
+
+    private String direccion;
+
+    private float zonaje;
+
     int x;
+
     int y;
 
 
-    public Sucursales(String codigo, String nombre, String direccion, String zonaje) {
+    public Sucursales(String codigo, String nombre, String direccion, float zonaje) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.direccion = direccion;
@@ -19,7 +27,7 @@ public class Sucursales {
     }
 
     public Sucursales() {
-        this("","","","");
+        this("","","",0);
     }
 
     public String getCodigo() {
@@ -42,7 +50,7 @@ public class Sucursales {
         return direccion;
     }
 
-    public String getZonaje() {
+    public float getZonaje() {
         return zonaje;
     }
 
@@ -50,7 +58,7 @@ public class Sucursales {
         this.direccion = direccion;
     }
 
-    public void setZonaje(String zonaje) {
+    public void setZonaje(float zonaje) {
         this.zonaje = zonaje;
     }
 

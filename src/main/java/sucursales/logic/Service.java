@@ -1,7 +1,7 @@
 package sucursales.logic;
 
 import sucursales.data.Data;
-import sucursales.data.DataSucursales;
+import sucursales.data.XmlPersister;
 
 import java.util.Comparator;
 import java.util.List;
@@ -18,11 +18,14 @@ public class Service {
     }
 
     private Data data;
-
-    private DataSucursales dataSucursal;
     private Service(){
-        dataSucursal = new DataSucursales();
-        data = new Data();
+
+        try{
+            data = XmlPersister.instance().load();
+        }
+        catch(Exception e){
+            data =  new Data();
+        }
     }
 
     public List<Empleado> empleadosSearch(String filtro){
@@ -39,7 +42,7 @@ public class Service {
     }
 
     public Sucursales sucursalGet(String codigo) throws Exception{
-        Sucursales result = dataSucursal.getSucursales().stream().filter(e->e.getCodigo().equals(codigo)).findFirst().orElse(null);
+        Sucursales result = data.getSucursales().stream().filter(e->e.getCodigo().equals(codigo)).findFirst().orElse(null);
         if (result!=null) return result;
         else throw new Exception("Sucursal no existe");
     }
@@ -51,8 +54,8 @@ public class Service {
     }
 
     public void sucursalAdd(Sucursales sucursal) throws Exception{
-        Sucursales result = dataSucursal.getSucursales().stream().filter(e->e.getCodigo().equals(sucursal.getCodigo())).findFirst().orElse(null);
-        if (result==null) dataSucursal.getSucursales().add(sucursal);
+        Sucursales result = data.getSucursales().stream().filter(e->e.getCodigo().equals(sucursal.getCodigo())).findFirst().orElse(null);
+        if (result==null) data.getSucursales().add(sucursal);
         else throw new Exception("Sucursal ya existe");
     }
 
@@ -70,18 +73,38 @@ public class Service {
     public void sucursalUpdate(Sucursales sucursal) throws Exception{
         Sucursales result;
         try{
-            result = this.sucursalGet(sucursal.codigo);
-            dataSucursal.getSucursales().remove(result);
-            dataSucursal.getSucursales().add(sucursal);
+            result = this.sucursalGet(sucursal.getCodigo());
+            data.getSucursales().remove(result);
+            data.getSucursales().add(sucursal);
         }catch (Exception e) {
             throw new Exception("Sucursal no existe");
         }
     }
 
-    public List<Sucursales> sucursalesSearch(String filtro){
-        return dataSucursal.getSucursales().stream()
+   public List<Sucursales> sucursalesSearch(String filtro){
+        return data.getSucursales().stream()
                 .filter(e->e.getNombre().contains(filtro))
                 .sorted(Comparator.comparing(e -> e.getCodigo()))
                 .collect(Collectors.toList());
+    }
+
+    public void store(){
+        try {
+            XmlPersister.instance().store(data);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public void empleadoDelete(Empleado empleado) throws Exception{
+        Empleado result = data.getEmpleados().stream().filter(e->e.getCedula().equals(empleado.getCedula())).findFirst().orElse(null);
+        if (result!=null) data.getEmpleados().remove(empleado);
+        else throw new Exception("Empleado no existe");
+    }
+
+    public void sucursalDelete(Sucursales sucursal) throws Exception{
+        Sucursales result = data.getSucursales().stream().filter(e->e.getCodigo().equals(sucursal.getCodigo())).findFirst().orElse(null);
+        if (result!=null) data.getSucursales().remove(sucursal);
+        else throw new Exception("Sucursal no existe");
     }
 }
