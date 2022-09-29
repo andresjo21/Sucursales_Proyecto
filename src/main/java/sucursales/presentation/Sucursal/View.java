@@ -38,10 +38,13 @@ public class View implements Observer {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(validate()){
+
                     Sucursales n = take();
                     try{
                         controller.guardar(n);
                         sucursalLbl = null;
+                        if(model.getModo() == Application.MODO_AGREGAR){mapaLbl.removeAll();}
+
                     }catch (Exception ex){
                         JOptionPane.showMessageDialog(panel, ex.getMessage(),"ERROR",JOptionPane.ERROR_MESSAGE);
                     }
@@ -185,9 +188,5 @@ public class View implements Observer {
         }
 
         return valid;
-    }
-
-    public JLabel getMapaLbl() {
-        return mapaLbl;
     }
 }

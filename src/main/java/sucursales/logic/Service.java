@@ -54,7 +54,8 @@ public class Service {
     }
 
     public void sucursalAdd(Sucursales sucursal) throws Exception{
-        Sucursales result = data.getSucursales().stream().filter(e->e.getCodigo().equals(sucursal.getCodigo())).findFirst().orElse(null);
+        Sucursales result = data.getSucursales().stream().
+                filter(e->e.getCodigo().equals(sucursal.getCodigo())).findFirst().orElse(null);
         if (result==null) data.getSucursales().add(sucursal);
         else throw new Exception("Sucursal ya existe");
     }

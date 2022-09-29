@@ -9,24 +9,24 @@ public class Empleado {
     String cedula;
     String nombre;
     String telefono;
-    double salario;
+    float salario;
 
     @XmlIDREF
     Sucursales sucursal;
-    double salarioTotal;
+    float salarioTotal;
 
 
-    public Empleado(String cedula, String nombre, String telefono, double salario, Sucursales sucursalId ,double salarioTotal) {
+    public Empleado(String cedula, String nombre, String telefono, float salario, Sucursales sucursalId) {
         this.cedula = cedula;
         this.nombre = nombre;
         this.telefono = telefono;
         this.salario = salario;
         this.sucursal = sucursalId;
-        this.salarioTotal = salarioTotal;
+        //setSalarioTotal(salario);
     }
 
     public Empleado() {
-        this("","","",0.0,null,0.0);
+        this("","","",0,null);
     }
 
     public String getCedula() {
@@ -64,7 +64,7 @@ public class Empleado {
         this.telefono = telefono;
     }
 
-    public void setSalario(double salario) {
+    public void setSalario(float salario) {
         this.salario = salario;
     }
 
@@ -72,7 +72,11 @@ public class Empleado {
         this.sucursal = sucursal;
     }
 
-    public void setSalarioTotal(double salarioTotal) {
-        this.salarioTotal = salarioTotal;
+    public void setSalarioTotal() {
+        if (sucursal != null) {
+            this.salarioTotal = salario + (salario * (sucursal.getZonaje() / 100));
+        } else {
+            this.salarioTotal = salario;
+        }
     }
 }

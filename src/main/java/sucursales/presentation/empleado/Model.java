@@ -1,8 +1,6 @@
 package sucursales.presentation.empleado;
 
-import sucursales.Application;
 import sucursales.logic.Empleado;
-import sucursales.logic.Service;
 import sucursales.logic.Sucursales;
 
 import java.util.List;
@@ -10,6 +8,7 @@ import java.util.List;
 public class Model extends java.util.Observable{
     Empleado current;
     int modo;
+    List<Sucursales> sucursalesLista;
 
     public Model() {
     }
@@ -41,15 +40,12 @@ public class Model extends java.util.Observable{
         notifyObservers(null);
     }
 
-    public List<Sucursales> getLista(){
-        return Application.sucursalesController.getLista();
+
+    public List<Sucursales> getSucursalesLista() {
+        return sucursalesLista;
     }
 
-    public Sucursales getSucursal(String id) {
-        try {
-            return Service.instance().sucursalGet(id);
-        } catch (Exception ex) {
-            return null;
-        }
+    public void setSucursalesLista(List<Sucursales> sucursalesLista) {
+        this.sucursalesLista = sucursalesLista;
     }
 }

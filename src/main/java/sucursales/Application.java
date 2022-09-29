@@ -18,23 +18,23 @@ public class Application {
         View empleadosView = new View();
         empleadosController = new Controller(empleadosView,empleadosModel);
 
-
-
-        sucursales.presentation.Sucursal.Model sucursalModel = new sucursales.presentation.Sucursal.Model();
-        sucursales.presentation.Sucursal.View sucursalView = new sucursales.presentation.Sucursal.View();
-        sucursalController = new sucursales.presentation.Sucursal.Controller(sucursalView,sucursalModel);
+        sucursales.presentation.main.Model mainModel= new sucursales.presentation.main.Model();
+        sucursales.presentation.main.View mainView = new sucursales.presentation.main.View();
+        mainController = new sucursales.presentation.main.Controller(mainView, mainModel);
 
         sucursales.presentation.sucursales.Model sucursalesModel= new sucursales.presentation.sucursales.Model();
         sucursales.presentation.sucursales.View sucursalesView = new sucursales.presentation.sucursales.View();
         sucursalesController = new sucursales.presentation.sucursales.Controller(sucursalesView, sucursalesModel);
 
+        sucursales.presentation.Sucursal.Model sucursalModel = new sucursales.presentation.Sucursal.Model();
+        sucursales.presentation.Sucursal.View sucursalView = new sucursales.presentation.Sucursal.View();
+        sucursalController = new sucursales.presentation.Sucursal.Controller(sucursalView,sucursalModel);
+
         sucursales.presentation.empleado.Model empleadoModel= new sucursales.presentation.empleado.Model();
         sucursales.presentation.empleado.View empleadoView = new sucursales.presentation.empleado.View();
         empleadoController = new sucursales.presentation.empleado.Controller(empleadoView,empleadoModel);
 
-        sucursales.presentation.main.Model mainModel= new sucursales.presentation.main.Model();
-        sucursales.presentation.main.View mainView = new sucursales.presentation.main.View();
-        mainController = new sucursales.presentation.main.Controller(mainView, mainModel);
+
 
         mainView.getPanel().add("Empleados",empleadosView.getPanel());
         mainView.getPanel().add("Sucursales",sucursalesView.getPanelSucursal());

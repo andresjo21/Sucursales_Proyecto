@@ -7,6 +7,7 @@ import sucursales.logic.Sucursales;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 
 public class Controller {
     View view;
@@ -14,11 +15,12 @@ public class Controller {
 
     public Controller(View view, Model model) {
         model.setCurrent(new Empleado());
-
+        model.setSucursalesLista(Service.instance().sucursalesSearch(""));
         this.view = view;
         this.model = model;
         view.setController(this);
         view.setModel(model);
+
     }
 
     public void preAgregar(){
@@ -63,5 +65,13 @@ public class Controller {
         model.setCurrent(e);
         model.commit();
         this.show();
+    }
+
+    public Sucursales getSucursal(String id){
+        try{
+            return Service.instance().sucursalGet(id);
+        }catch(Exception ex){
+            return null;
+        }
     }
 }

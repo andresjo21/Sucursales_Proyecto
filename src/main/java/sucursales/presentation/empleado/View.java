@@ -2,7 +2,6 @@ package sucursales.presentation.empleado;
 
 import sucursales.Application;
 import sucursales.logic.Empleado;
-import sucursales.logic.Service;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,7 +9,7 @@ import java.awt.event.*;
 import java.util.Observable;
 import java.util.Observer;
 
-import static java.lang.Double.parseDouble;
+import static java.lang.Float.parseFloat;
 
 public class View implements Observer {
     private JPanel panel;
@@ -89,10 +88,21 @@ public class View implements Observer {
         this.cedulaFld.setText(current.getCedula());
         nombreFld.setText(current.getNombre());
         telefonoFld.setText(current.getTelefono());
+        creacionSucursalLbl();
         if(model.getModo() == Application.MODO_EDITAR){
+            for(int i = 0; i < model.getSucursalesLista().size(); i++){
+                if(current.getSucursal() == model.getSucursalesLista().get(i)){
+                    puntoSucursalLbl = (JLabel) mapaLbl.getComponent(i);
+                    puntoSucursalLbl.setIcon(new ImageIcon("../icons/SucursalSel.png"));
+                    puntoSucursalLbl.setIcon(new ImageIcon(((ImageIcon) puntoSucursalLbl.getIcon()).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
+                    puntoSucursalLbl.setBounds(model.getSucursalesLista().get(i).getX(), model.getSucursalesLista().get(i).getY(), 30, 30);
+                    break;
+                }
+            }
             salarioFld.setText(String.valueOf(current.getSalario()));
             try{
-                sucursalFld.setText(current.getSucursal().getNombre());}
+                sucursalFld.setText(current.getSucursal().getNombre());
+            }
             catch (Exception ex) {
                 ex.printStackTrace();
             }
@@ -100,7 +110,6 @@ public class View implements Observer {
             salarioFld.setText("");
             sucursalFld.setText("");
         }
-        creacionSucursalLbl();
 
         this.panel.validate();
     }
@@ -110,8 +119,9 @@ public class View implements Observer {
         e.setCedula(cedulaFld.getText());
         e.setNombre(nombreFld.getText());
         e.setTelefono(telefonoFld.getText());
-        e.setSalario(parseDouble(salarioFld.getText()));
-        e.setSucursal(model.getSucursal(sucursalFld.getClientProperty("codigo").toString()));
+        e.setSalario(parseFloat(salarioFld.getText()));
+        e.setSucursal(model.getSucursalesLista().stream().filter(s -> s.getCodigo().equals(sucursalFld.getClientProperty("codigo"))).findFirst().get());
+        e.setSalarioTotal();
         return e;
     }
 
@@ -167,39 +177,40 @@ public class View implements Observer {
 
     public void creacionSucursalLbl(){
         mapaLbl.removeAll();
-        for(int i = 0; i < model.getLista().size(); i++){
+        for(int i = 0; i < model.getSucursalesLista().size(); i++){
             puntoSucursalLbl = new JLabel();
             puntoSucursalLbl.setLayout(null);
             puntoSucursalLbl.setIcon(new ImageIcon("../icons/Sucursal.png"));
             puntoSucursalLbl.setIcon(new ImageIcon(((ImageIcon) puntoSucursalLbl.getIcon()).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
-            puntoSucursalLbl.setBounds( model.getLista().get(i).getX(), model.getLista().get(i).getY(),30, 30);
+            puntoSucursalLbl.setBounds( model.getSucursalesLista().get(i).getX(), model.getSucursalesLista().get(i).getY(),30, 30);
             puntoSucursalLbl.putClientProperty("index", new Integer(i));
                puntoSucursalLbl.addMouseListener(new MouseAdapter() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
 
                         int index = (Integer) ((JLabel) e.getSource()).getClientProperty("index");
-                        sucursalFld.setText(model.getLista().get(index).getNombre());
-                        sucursalFld.putClientProperty("codigo", model.getLista().get(index).getCodigo());
+                        sucursalFld.setText(model.getSucursalesLista().get(index).getNombre());
+                        sucursalFld.putClientProperty("codigo", model.getSucursalesLista().get(index).getCodigo());
 
-                        for (int i = 0; i < model.getLista().size(); i++) {
+
+                        for (int i = 0; i < model.getSucursalesLista().size(); i++) {
                             JLabel auxLbl = (JLabel) mapaLbl.getComponents()[i];
                             puntoSucursalLbl = (JLabel) e.getSource();
                             if (auxLbl == puntoSucursalLbl) {
                                 puntoSucursalLbl.setIcon(new ImageIcon("../icons/SucursalSel.png"));
                                 puntoSucursalLbl.setIcon(new ImageIcon(((ImageIcon) puntoSucursalLbl.getIcon()).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
-                                puntoSucursalLbl.setBounds(model.getLista().get(index).getX(), model.getLista().get(index).getY(), 30, 30);
+                                puntoSucursalLbl.setBounds(model.getSucursalesLista().get(index).getX(), model.getSucursalesLista().get(index).getY(), 30, 30);
                             } else {
                                 auxLbl.setIcon(new ImageIcon("../icons/Sucursal.png"));
                                 auxLbl.setIcon(new ImageIcon(((ImageIcon) auxLbl.getIcon()).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
-                                auxLbl.setBounds(model.getLista().get(i).getX(), model.getLista().get(i).getY(), 30, 30);
+                                auxLbl.setBounds(model.getSucursalesLista().get(i).getX(), model.getSucursalesLista().get(i).getY(), 30, 30);
                             }
                         }
 
                     }
                 });
 
-            puntoSucursalLbl.setToolTipText("<html>"+model.getLista().get(i).getNombre() + "<br>" + model.getLista().get(i).getDireccion()+"<html>");
+            puntoSucursalLbl.setToolTipText("<html>"+model.getSucursalesLista().get(i).getNombre() + "<br>" + model.getSucursalesLista().get(i).getDireccion()+"<html>");
             mapaLbl.add(puntoSucursalLbl,i);
             mapaLbl.repaint();
         }
