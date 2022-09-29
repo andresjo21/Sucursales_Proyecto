@@ -97,10 +97,10 @@ public class Controller {
         Document document = new Document(pdf);
         document.setMargins(20, 20, 20, 20);
 
-        Table header = new Table(1);
+        Table header = new Table(4);
         header.setWidth(400);
         header.setHorizontalAlignment(HorizontalAlignment.CENTER);
-        header.addCell(getCell(new Paragraph("Sistema Integrado SISE").setFont(font).setBold().setFontSize(20f), TextAlignment.CENTER,false));
+        header.addCell(getCell(new Paragraph("SISE:Sistema de Sucursales y Empleados").setFont(font).setBold().setFontSize(20f), TextAlignment.CENTER,false));
         //header.addCell(getCell(new Image(ImageDataFactory.create("logo.jpg")), HorizontalAlignment.CENTER,false));
         document.add(header);
 
@@ -108,7 +108,7 @@ public class Controller {
 
         Color bkg = ColorConstants.RED;
         Color frg= ColorConstants.WHITE;
-        Table body = new Table(2);
+        Table body = new Table(4);
         body.setWidth(400);
         body.setHorizontalAlignment(HorizontalAlignment.CENTER);
         body.addCell(getCell(new Paragraph("Codigo").setBackgroundColor(bkg).setFontColor(frg),TextAlignment.CENTER,true));

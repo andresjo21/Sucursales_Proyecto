@@ -96,7 +96,7 @@ public class Controller {
         Table header = new Table(1);
         header.setWidth(400);
         header.setHorizontalAlignment(HorizontalAlignment.CENTER);
-        header.addCell(getCell(new Paragraph("Sistema Integrado SISE").setFont(font).setBold().setFontSize(20f), TextAlignment.CENTER,false));
+        header.addCell(getCell(new Paragraph("SISE:Sistema de Sucursales y Empleados").setFont(font).setBold().setFontSize(20f), TextAlignment.CENTER,false));
         //header.addCell(getCell(new Image(ImageDataFactory.create("pdf.png")), HorizontalAlignment.CENTER,false));
         document.add(header);
 
