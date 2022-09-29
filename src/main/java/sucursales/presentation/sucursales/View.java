@@ -1,7 +1,5 @@
 package sucursales.presentation.sucursales;
 
-import sucursales.logic.Sucursales;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
