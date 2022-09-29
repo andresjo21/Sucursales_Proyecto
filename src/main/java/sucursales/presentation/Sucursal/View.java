@@ -68,7 +68,7 @@ public class View implements Observer {
             }
         });
         mapaLbl.setLayout(null);
-        mapaLbl.setIcon(new ImageIcon("../icons/mapa.png"));
+        mapaLbl.setIcon(new ImageIcon("./src/main/resources/sucursales/presentation/icons/mapa.png"));
         //Adapta tamaño de la imagen
         mapaLbl.setIcon(new ImageIcon(((ImageIcon) mapaLbl.getIcon()).getImage().getScaledInstance(400, 400, Image.SCALE_SMOOTH)));
 
@@ -93,7 +93,7 @@ public class View implements Observer {
     public void creacionSucursalLbl(int x, int y){
         if(sucursalLbl == null) sucursalLbl = new JLabel();
         sucursalLbl.setLayout(null);
-        sucursalLbl.setIcon(new ImageIcon("../icons/Sucursal.png"));
+        sucursalLbl.setIcon(new ImageIcon("./src/main/resources/sucursales/presentation/icons/Sucursal.png"));
         sucursalLbl.setIcon(new ImageIcon(((ImageIcon) sucursalLbl.getIcon()).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
         sucursalLbl.setBounds(x, y, 30, 30);
         mapaLbl.add(sucursalLbl);

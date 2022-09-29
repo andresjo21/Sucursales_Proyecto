@@ -1,5 +1,7 @@
 package sucursales.presentation.acercade;
 
+import sucursales.Application;
+
 public class Controller {
     View view;
     Model model;
@@ -12,12 +14,7 @@ public class Controller {
     }
 
     public void show(){
-        view.setVisible(true);
+        Application.window.setContentPane(view.getPanel());
     }
-
-    public void hide(){
-        view.setVisible(false);
-    }
-
 
 }
