@@ -55,7 +55,7 @@ public class View implements Observer {
                             puntoSucursalLbl.setIcon(new ImageIcon("../icons/SucursalSel.png"));
                             puntoSucursalLbl.setIcon(new ImageIcon(((ImageIcon) puntoSucursalLbl.getIcon()).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
                             puntoSucursalLbl.setBounds(model.getSucursales().get(i).getX(), model.getSucursales().get(i).getY(),30,30);
-                            puntoSucursalLbl.setToolTipText(model.getSucursales().get(i).getNombre() + " " + model.getSucursales().get(i).getDireccion());
+                            puntoSucursalLbl.setToolTipText("<html>"+model.getSucursales().get(i).getNombre() + "<br>" + model.getSucursales().get(i).getDireccion()+"<html>");
                             mapaLbl.add(puntoSucursalLbl);
                             mapaLbl.repaint();
                         }
