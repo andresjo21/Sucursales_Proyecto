@@ -128,7 +128,7 @@
             </constraints>
             <properties>
               <icon value="sucursales/presentation/icons/pdf.png"/>
-              <text value="Reporte"/>
+              <text value="PDF"/>
             </properties>
           </component>
         </children>
