@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -19,6 +20,7 @@ public class View implements Observer {
     private JButton agregarFld;
     private JButton borrarBtn;
     private JLabel mapaLbl;
+    private JButton pdfButton;
     private JLabel puntoSucursalLbl;
 
     public View() {
@@ -59,8 +61,10 @@ public class View implements Observer {
                         }
                     }
                 }
+
             }
         });
+
 
         mapaLbl.setLayout(null);
         mapaLbl.setIcon(new ImageIcon("../icons/mapa.png"));
@@ -72,6 +76,18 @@ public class View implements Observer {
             public void actionPerformed(ActionEvent e) {
                 int row = sucursalesFld.getSelectedRow();
                 controller.borrar(row);
+            }
+        });
+        pdfButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    controller.imprimir();
+                    if (Desktop.isDesktopSupported()) {
+                        File myFile = new File("sucursales.pdf");
+                        Desktop.getDesktop().open(myFile);
+                    }
+                } catch (Exception ex) { }
             }
         });
     }

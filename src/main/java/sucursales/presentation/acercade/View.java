@@ -31,4 +31,10 @@ public class View implements Observer {
     public JPanel getPanel() {
         return panel;
     }
+
+    public void setVisible(boolean b) {
+    }
+
+    public void setController(sucursales.presentation.acercade.Controller controller) {
+    }
 }

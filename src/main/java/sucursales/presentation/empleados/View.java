@@ -1,10 +1,12 @@
 package sucursales.presentation.empleados;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -16,6 +18,7 @@ public class View implements Observer {
     private JTable empleadosFld;
     private JLabel nombreLbl;
     private JButton borrarBtn;
+    private JButton pdfButton;
 
     public View() {
         buscarFld.addActionListener(new ActionListener() {
@@ -48,6 +51,18 @@ public class View implements Observer {
                 controller.borrar(row);
             }
         });
+        pdfButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    controller.imprimir();
+                    if (Desktop.isDesktopSupported()) {
+                        File myFile = new File("empleados.pdf");
+                        Desktop.getDesktop().open(myFile);
+                    }
+                } catch (Exception ex) { }
+            }
+        });
     }
 
     public JPanel getPanel() {
@@ -74,5 +89,6 @@ public class View implements Observer {
         empleadosFld.getColumnModel().getColumn(1).setPreferredWidth(130);
         this.panel.revalidate();
     }
+
 
 }
