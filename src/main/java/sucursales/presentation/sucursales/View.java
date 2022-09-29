@@ -50,7 +50,7 @@ public class View implements Observer {
                             mapaLbl.getComponent(i).setVisible(false);
                             puntoSucursalLbl = new JLabel();
                             puntoSucursalLbl.setLayout(null);
-                            puntoSucursalLbl.setIcon(new ImageIcon("../icons/SucursalSel.png"));
+                            puntoSucursalLbl.setIcon(new ImageIcon("./src/main/resources/sucursales/presentation/icons/SucursalSel.png"));
                             puntoSucursalLbl.setIcon(new ImageIcon(((ImageIcon) puntoSucursalLbl.getIcon()).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
                             puntoSucursalLbl.setBounds(model.getSucursales().get(i).getX(), model.getSucursales().get(i).getY(),30,30);
                             puntoSucursalLbl.setToolTipText("<html>"+model.getSucursales().get(i).getNombre() + "<br>" + model.getSucursales().get(i).getDireccion()+"<html>");
@@ -63,7 +63,7 @@ public class View implements Observer {
         });
 
         mapaLbl.setLayout(null);
-        mapaLbl.setIcon(new ImageIcon("../icons/mapa.png"));
+        mapaLbl.setIcon(new ImageIcon("./src/main/resources/sucursales/presentation/icons/mapa.png"));
         //Adapta tamaño de la imagen
         mapaLbl.setIcon(new ImageIcon(((ImageIcon) mapaLbl.getIcon()).getImage().getScaledInstance(400, 400, Image.SCALE_SMOOTH)));
 
@@ -105,7 +105,7 @@ public class View implements Observer {
         for(int i = 0; i < model.getSucursales().size(); i++){
             puntoSucursalLbl = new JLabel();
             puntoSucursalLbl.setLayout(null);
-            puntoSucursalLbl.setIcon(new ImageIcon("../icons/Sucursal.png"));
+            puntoSucursalLbl.setIcon(new ImageIcon("./src/main/resources/sucursales/presentation/icons/Sucursal.png"));
             puntoSucursalLbl.setIcon(new ImageIcon(((ImageIcon) puntoSucursalLbl.getIcon()).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
             puntoSucursalLbl.setBounds( model.getSucursales().get(i).getX(), model.getSucursales().get(i).getY(),30, 30);
             puntoSucursalLbl.setToolTipText("<html>"+model.getSucursales().get(i).getNombre() + "<br>" + model.getSucursales().get(i).getDireccion()+"<html>");

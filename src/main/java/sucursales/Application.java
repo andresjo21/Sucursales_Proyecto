@@ -34,10 +34,15 @@ public class Application {
         sucursales.presentation.empleado.View empleadoView = new sucursales.presentation.empleado.View();
         empleadoController = new sucursales.presentation.empleado.Controller(empleadoView,empleadoModel);
 
+        sucursales.presentation.acercade.Model acercadeModel= new sucursales.presentation.acercade.Model();
+        sucursales.presentation.acercade.View acercadeView = new sucursales.presentation.acercade.View();
+        acercadeController = new sucursales.presentation.acercade.Controller(acercadeView, acercadeModel);
+
 
 
         mainView.getPanel().add("Empleados",empleadosView.getPanel());
         mainView.getPanel().add("Sucursales",sucursalesView.getPanelSucursal());
+        mainView.getPanel().add("Acerca de",acercadeView.getPanel());
 
         window = new JFrame();
         window.setSize(400,300);
@@ -54,6 +59,8 @@ public class Application {
     public static sucursales.presentation.Sucursal.Controller sucursalController;
     public static sucursales.presentation.sucursales.Controller sucursalesController;
     public static sucursales.presentation.main.Controller mainController;
+
+    public static  sucursales.presentation.acercade.Controller acercadeController;
 
     public static JFrame window;
 

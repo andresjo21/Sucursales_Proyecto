@@ -59,7 +59,7 @@ public class View implements Observer {
             }
         });
         mapaLbl.setLayout(null);
-        mapaLbl.setIcon(new ImageIcon("../icons/mapa.png"));
+        mapaLbl.setIcon(new ImageIcon("./src/main/resources/sucursales/presentation/icons/mapa.png"));
         //Adapta tamaño de la imagen
         mapaLbl.setIcon(new ImageIcon(((ImageIcon) mapaLbl.getIcon()).getImage().getScaledInstance(400, 400, Image.SCALE_SMOOTH)));
 
@@ -93,7 +93,7 @@ public class View implements Observer {
             for(int i = 0; i < model.getSucursalesLista().size(); i++){
                 if(current.getSucursal() == model.getSucursalesLista().get(i)){
                     puntoSucursalLbl = (JLabel) mapaLbl.getComponent(i);
-                    puntoSucursalLbl.setIcon(new ImageIcon("../icons/SucursalSel.png"));
+                    puntoSucursalLbl.setIcon(new ImageIcon("./src/main/resources/sucursales/presentation/icons/SucursalSel.png"));
                     puntoSucursalLbl.setIcon(new ImageIcon(((ImageIcon) puntoSucursalLbl.getIcon()).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
                     puntoSucursalLbl.setBounds(model.getSucursalesLista().get(i).getX(), model.getSucursalesLista().get(i).getY(), 30, 30);
                     break;
@@ -180,7 +180,7 @@ public class View implements Observer {
         for(int i = 0; i < model.getSucursalesLista().size(); i++){
             puntoSucursalLbl = new JLabel();
             puntoSucursalLbl.setLayout(null);
-            puntoSucursalLbl.setIcon(new ImageIcon("../icons/Sucursal.png"));
+            puntoSucursalLbl.setIcon(new ImageIcon("./src/main/resources/sucursales/presentation/icons/Sucursal.png"));
             puntoSucursalLbl.setIcon(new ImageIcon(((ImageIcon) puntoSucursalLbl.getIcon()).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
             puntoSucursalLbl.setBounds( model.getSucursalesLista().get(i).getX(), model.getSucursalesLista().get(i).getY(),30, 30);
             puntoSucursalLbl.putClientProperty("index", new Integer(i));
@@ -197,11 +197,11 @@ public class View implements Observer {
                             JLabel auxLbl = (JLabel) mapaLbl.getComponents()[i];
                             puntoSucursalLbl = (JLabel) e.getSource();
                             if (auxLbl == puntoSucursalLbl) {
-                                puntoSucursalLbl.setIcon(new ImageIcon("../icons/SucursalSel.png"));
+                                puntoSucursalLbl.setIcon(new ImageIcon("./src/main/resources/sucursales/presentation/icons/SucursalSel.png"));
                                 puntoSucursalLbl.setIcon(new ImageIcon(((ImageIcon) puntoSucursalLbl.getIcon()).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
                                 puntoSucursalLbl.setBounds(model.getSucursalesLista().get(index).getX(), model.getSucursalesLista().get(index).getY(), 30, 30);
                             } else {
-                                auxLbl.setIcon(new ImageIcon("../icons/Sucursal.png"));
+                                auxLbl.setIcon(new ImageIcon("./src/main/resources/sucursales/presentation/icons/Sucursal.png"));
                                 auxLbl.setIcon(new ImageIcon(((ImageIcon) auxLbl.getIcon()).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
                                 auxLbl.setBounds(model.getSucursalesLista().get(i).getX(), model.getSucursalesLista().get(i).getY(), 30, 30);
                             }
