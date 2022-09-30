@@ -1,5 +1,6 @@
 package sucursales.logic;
 
+import sucursales.Application;
 import sucursales.data.Data;
 import sucursales.data.XmlPersister;
 
@@ -56,7 +57,9 @@ public class Service {
     public void sucursalAdd(Sucursales sucursal) throws Exception{
         Sucursales result = data.getSucursales().stream().
                 filter(e->e.getCodigo().equals(sucursal.getCodigo())).findFirst().orElse(null);
-        if (result==null) data.getSucursales().add(sucursal);
+        if (result==null) {
+            data.getSucursales().add(sucursal);
+        }
         else throw new Exception("Sucursal ya existe");
     }
 

@@ -67,11 +67,11 @@ public class Controller {
         this.show();
     }
 
-    public Sucursales getSucursal(String id){
-        try{
-            return Service.instance().sucursalGet(id);
-        }catch(Exception ex){
-            return null;
-        }
+    public Model getModel() {
+        return model;
+    }
+
+    public void setModel(Model model) {
+        this.model = model;
     }
 }

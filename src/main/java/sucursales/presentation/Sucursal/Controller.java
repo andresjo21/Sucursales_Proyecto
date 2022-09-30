@@ -51,6 +51,7 @@ public class Controller {
                 break;
         }
         Application.sucursalesController.buscar("");
+        Application.empleadoController.getModel().setSucursalesLista(Service.instance().sucursalesSearch(""));
         model.commit();
     }
 
