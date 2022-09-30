@@ -38,4 +38,6 @@ public class View implements Observer {
     public void setVisible(boolean b) {
     }
 
+    //public void setController(sucursales.presentation.acercade.Controller controller) {
+    //}
 }
