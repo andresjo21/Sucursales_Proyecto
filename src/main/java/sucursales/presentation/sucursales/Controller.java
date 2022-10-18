@@ -27,7 +27,7 @@ public class Controller {
     View view;
     Model model;
 
-    public Controller(View view, Model model) {
+    public Controller(View view, Model model) throws Exception {
             model.setSucursales(Service.instance().sucursalesSearch(""));
             this.view = view;
             this.model = model;
@@ -35,7 +35,7 @@ public class Controller {
             view.setModel(model);
         }
 
-        public void buscar(String filtro){
+        public void buscar(String filtro) throws Exception {
             List<Sucursales> rows = Service.instance().sucursalesSearch(filtro);
             model.setSucursales(rows);
             model.commit();

@@ -13,7 +13,7 @@ public class Controller {
     View view;
     Model model;
 
-    public Controller(View view, Model model) {
+    public Controller(View view, Model model) throws Exception {
         model.setCurrent(new Empleado());
         model.setSucursalesLista(Service.instance().sucursalesSearch(""));
         this.view = view;
