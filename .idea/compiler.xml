@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="Sucursales" />
+        <module name="Sucursales_Proyecto_Progra3" />
       </profile>
     </annotationProcessing>
   </component>
