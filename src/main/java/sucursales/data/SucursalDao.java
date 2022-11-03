@@ -62,7 +62,6 @@ public class SucursalDao {
         if (count == 0) {
             throw new Exception("SUCURSAL NO EXISTE");
         }
-
     }
 
     public void delete(Sucursales e) throws Exception {

@@ -24,7 +24,11 @@ public class View implements Observer {
         buscarFld.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                controller.buscar(nombreFld.getText());
+                try {
+                    controller.buscar(nombreFld.getText());
+                } catch (Exception ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
         agregarFld.addActionListener(new ActionListener() {

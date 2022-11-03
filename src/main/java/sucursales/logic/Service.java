@@ -3,6 +3,7 @@ package sucursales.logic;
 import sucursales.Application;
 import sucursales.data.Data;
 import sucursales.data.SucursalDao;
+import sucursales.data.EmpleadoDao;
 import sucursales.data.XmlPersister;
 
 import java.util.Comparator;
@@ -22,6 +23,7 @@ public class Service {
     private Data data;
     private Service(){
         sucursalDao= new SucursalDao();
+        empleadoDao = new EmpleadoDao();
         try{
             data = XmlPersister.instance().load();
         }
@@ -30,17 +32,19 @@ public class Service {
         }
     }
 
-    public List<Empleado> empleadosSearch(String filtro){
-        return data.getEmpleados().stream()
+    public List<Empleado> empleadosSearch(String filtro) throws Exception {
+      return empleadoDao.findByReferencia(filtro);
+       /* return data.getEmpleados().stream()
                 .filter(e->e.getNombre().contains(filtro))
                 .sorted(Comparator.comparing(e -> e.getCedula()))
-                .collect(Collectors.toList());
+                .collect(Collectors.toList());*/
     }
 
     public Empleado empleadoGet(String cedula) throws Exception{
-        Empleado result = data.getEmpleados().stream().filter(e->e.getCedula().equals(cedula)).findFirst().orElse(null);
+        return empleadoDao.read(cedula);
+        /*Empleado result = data.getEmpleados().stream().filter(e->e.getCedula().equals(cedula)).findFirst().orElse(null);
         if (result!=null) return result;
-        else throw new Exception("Empleado no existe");
+        else throw new Exception("Empleado no existe");*/
     }
 
     public Sucursales sucursalGet(String codigo) throws Exception{
@@ -51,9 +55,10 @@ public class Service {
     }
 
     public void empleadoAdd(Empleado empleado) throws Exception{
-        Empleado result = data.getEmpleados().stream().filter(e->e.getCedula().equals(empleado.getCedula())).findFirst().orElse(null);
+        empleadoDao.create(empleado);
+        /*Empleado result = data.getEmpleados().stream().filter(e->e.getCedula().equals(empleado.getCedula())).findFirst().orElse(null);
         if (result==null) data.getEmpleados().add(empleado);
-        else throw new Exception("Empleado ya existe");
+        else throw new Exception("Empleado ya existe");*/
     }
 
     public void sucursalAdd(Sucursales sucursal) throws Exception{
@@ -67,14 +72,15 @@ public class Service {
     }
 
     public void empleadoUpdate(Empleado empleado) throws Exception{
-        Empleado result;
+        empleadoDao.update(empleado);
+        /*Empleado result;
         try{
             result = this.empleadoGet(empleado.cedula);
             data.getEmpleados().remove(result);
             data.getEmpleados().add(empleado);
         }catch (Exception e) {
             throw new Exception("Empleado no existe");
-        }
+        }*/
     }
 
     public void sucursalUpdate(Sucursales sucursal) throws Exception{
@@ -119,5 +125,6 @@ public class Service {
 
     //Base de datos Sucursales
     private SucursalDao sucursalDao;
+    private EmpleadoDao empleadoDao;
 
 }
